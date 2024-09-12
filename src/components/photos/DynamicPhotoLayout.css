@@ -1,0 +1,32 @@
+/* DynamicPhotoLayout.css */
+.dynamic-layout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  .layout-one .image-container {
+    width: 100%;
+  }
+  
+  .layout-two .image-container {
+    width: 48%;
+  }
+  
+  .layout-three .image-container {
+    width: 32%;
+  }
+  
+  .layout-four .image-container {
+    width: 48%;
+  }
+  
+  .layout-five .image-container {
+    width: 30%;
+  }
+  
+  .layout-six .image-container {
+    width: 30%;
+  }
+  

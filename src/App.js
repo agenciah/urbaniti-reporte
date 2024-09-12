@@ -1,25 +1,60 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import { ReportProvider } from './components/context/ReportContext';
+import MonthSelector from './components/MonthSelector';
+import PageList from './components/PageList';
+import AddPageModal from './components/AddPageModal';
+import DownloadReportButton from './components/DownloadReportButton';
+import { Button, Typography, Box, Paper } from '@mui/material';
 
-function App() {
+const App = () => {
+  const [editorOpen, setEditorOpen] = useState(false);
+
+  const handleOpenEditor = () => setEditorOpen(true);
+  const handleCloseEditor = () => setEditorOpen(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <ReportProvider>
+      <div className="app-container" style={{ padding: '16px', maxWidth: '800px', margin: '0 auto' }}>
+        <Typography variant="h4" component="h1" align="center" gutterBottom>
+          Generador de Reportes Operativos
+        </Typography>
+        
+        {/* Contenedor de componentes */}
+        <Box 
+          sx={{ display: 'flex', flexDirection: 'column', gap: '16px' }}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          {/* Selector de Mes */}
+          <Paper elevation={3} sx={{ padding: '16px' }}>
+            <MonthSelector />
+          </Paper>
+          
+          {/* Botón para abrir el modal de agregar página */}
+          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+            <Button
+              variant="contained" 
+              color="primary"
+              onClick={handleOpenEditor}
+            >
+              Agregar Página
+            </Button>
+          </Box>
+          
+          {/* Modal de agregar página */}
+          <AddPageModal open={editorOpen} onClose={handleCloseEditor} />
+          
+          {/* Lista de páginas creadas */}
+          <Paper elevation={3} sx={{ padding: '16px' }}>
+            <PageList />
+          </Paper>
+          
+          {/* Botón para descargar el reporte */}
+          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+            <DownloadReportButton />
+          </Box>
+        </Box>
+      </div>
+    </ReportProvider>
   );
-}
+};
 
 export default App;

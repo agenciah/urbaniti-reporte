@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/urbaniti-reporte/build/static/css/main.e6c13ad2.css",
+    "main.js": "/urbaniti-reporte/build/static/js/main.166d0440.js",
+    "static/js/781.cada995b.chunk.js": "/urbaniti-reporte/build/static/js/781.cada995b.chunk.js",
+    "static/js/155.8da2b770.chunk.js": "/urbaniti-reporte/build/static/js/155.8da2b770.chunk.js",
+    "static/js/714.3f6826a4.chunk.js": "/urbaniti-reporte/build/static/js/714.3f6826a4.chunk.js",
+    "static/js/453.d07708a1.chunk.js": "/urbaniti-reporte/build/static/js/453.d07708a1.chunk.js",
+    "static/media/Portrait.JPG": "/urbaniti-reporte/build/static/media/Portrait.b5e3f39ffc0550541daf.JPG",
+    "static/media/JardineríaAntesYDespuesTemplate.JPG": "/urbaniti-reporte/build/static/media/JardineríaAntesYDespuesTemplate.61ccf5c3efcc959f35ff.JPG",
+    "static/media/MantenimientoTemplate.JPG": "/urbaniti-reporte/build/static/media/MantenimientoTemplate.0c57425362702a6602eb.JPG",
+    "static/media/JardineriaTemplate.JPG": "/urbaniti-reporte/build/static/media/JardineriaTemplate.c8dc565fcefc94feb050.JPG",
+    "static/media/ConserjeríaTemplate.JPG": "/urbaniti-reporte/build/static/media/ConserjeríaTemplate.3af390470b4c23420bab.JPG",
+    "static/media/AlbercaTemplate.JPG": "/urbaniti-reporte/build/static/media/AlbercaTemplate.3920bf9d3552623d9a4f.JPG",
+    "static/media/AvisosTemplate.JPG": "/urbaniti-reporte/build/static/media/AvisosTemplate.49819f5c1928f3179d51.JPG",
+    "static/media/SeguridadTemplate.JPG": "/urbaniti-reporte/build/static/media/SeguridadTemplate.d8d4b106ef2c1447d8a6.JPG",
+    "index.html": "/urbaniti-reporte/build/index.html",
+    "main.e6c13ad2.css.map": "/urbaniti-reporte/build/static/css/main.e6c13ad2.css.map",
+    "main.166d0440.js.map": "/urbaniti-reporte/build/static/js/main.166d0440.js.map",
+    "781.cada995b.chunk.js.map": "/urbaniti-reporte/build/static/js/781.cada995b.chunk.js.map",
+    "155.8da2b770.chunk.js.map": "/urbaniti-reporte/build/static/js/155.8da2b770.chunk.js.map",
+    "714.3f6826a4.chunk.js.map": "/urbaniti-reporte/build/static/js/714.3f6826a4.chunk.js.map",
+    "453.d07708a1.chunk.js.map": "/urbaniti-reporte/build/static/js/453.d07708a1.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.166d0440.js"
+  ]
+}
