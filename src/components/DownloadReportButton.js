@@ -54,12 +54,15 @@ const DownloadReportButton = () => {
         doc.addImage(page.template, 'JPEG', 0, 0, 60.144, 33.831);
       }
 
-      // Configurar el título de la página
+      // Configurar el nuevo título de la página
+      doc.setTextColor(255, 255, 255);
+      const pageTitle = `Informe de actividades ${reportData.month.toLowerCase()} 2024`;
       doc.setFont('Roboto', 'Regular');
       doc.setFontSize(40);
-      doc.text(page.title || '', 3, 5);
+      doc.text(pageTitle, 19, 6); // Añadir el nuevo título en cada página
 
       // Añadir el texto
+      doc.setTextColor(0, 0, 0);
       const textLayout = calculateTextLayout(page.photos ? page.photos.length : 0);
       const textLines = doc.splitTextToSize(page.text || '', textLayout.maxWidth);
       doc.text(textLines, textLayout.x, textLayout.y);
