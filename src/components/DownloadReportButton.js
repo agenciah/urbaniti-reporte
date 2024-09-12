@@ -21,10 +21,26 @@ const DownloadReportButton = () => {
     });
 
     // *** Portada ***
+
+    // Añadir la imagen de la portada
     doc.addImage(PortraitTemplate, 'JPEG', 0, 0, 60.144, 33.831);
+
+    // Texto "INFORME DE ACTIVIDADES"
     doc.setFont('Nunito', 'Medium');
-    doc.setFontSize(74);
-    doc.text(`INFORME DE ACTIVIDADES ${reportData.month} 2024`, 3, 15);
+    doc.setFontSize(50); // Puedes ajustar este tamaño
+    doc.text('INFORME DE ACTIVIDADES', 3, 17, {
+      maxWidth: 15 // Ajusta el ancho máximo del texto si lo deseas
+    });
+
+    // Texto del mes y año (con letras blancas)
+    doc.setTextColor(255, 255, 255); // Establece el color del texto a blanco
+    doc.setFontSize(50); // Tamaño del texto para el mes
+    doc.text(`${reportData.month} 2024`, 3, 28, {
+      maxWidth: 50 // También puedes ajustar el ancho máximo si lo deseas
+    });
+
+    // Restaurar el color del texto para el resto del PDF
+    doc.setTextColor(0, 0, 0);
 
     // Añadir nuevas páginas
     if (reportData.pages.length > 0) {
