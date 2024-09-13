@@ -6,14 +6,8 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import PhotoUploader from './PhotoUploader';
 import { ReportContext } from './context/ReportContext';
-
-import AlbercaTemplate from './images/BackgroundTemplates/AlbercaTemplate.JPG'
-import AvisosTemplate from './images/BackgroundTemplates/AvisosTemplate.JPG'
-import ConserjeriaTemplate from './images/BackgroundTemplates/ConserjeríaTemplate.JPG'
-import Jardineria from './images/BackgroundTemplates/JardineriaTemplate.JPG'
-import JardineriaBeforeAndThen from './images/BackgroundTemplates/JardineríaAntesYDespuesTemplate.JPG'
-import MantenimientoTemplate from './images/BackgroundTemplates/MantenimientoTemplate.JPG'
-import SeguridadTemplate from './images/BackgroundTemplates/SeguridadTemplate.JPG'
+import TemplateSelector from './TemplateSelector'; // Importa el nuevo componente
+import ReportTypeSelector from './ReportTypeSelector'; // Importa el nuevo componente
 
 const AddPageModal = ({ open, onClose }) => {
   const { addPage } = useContext(ReportContext);
@@ -24,7 +18,6 @@ const AddPageModal = ({ open, onClose }) => {
   const [maxChars, setMaxChars] = useState(400); // Default max characters
 
   useEffect(() => {
-    // Set maxChars based on the number of images
     if (images.length <= 2) {
       setMaxChars(400);
     } else if (images.length <= 4) {
@@ -39,50 +32,19 @@ const AddPageModal = ({ open, onClose }) => {
       setError('Debe seleccionar un tipo de reporte, ingresar un texto y agregar al menos una imagen.');
       return;
     }
-  
-    // Variable para almacenar la plantilla seleccionada
-    let selectedTemplate;
-  
-    // Asignar la plantilla basada en el tipo de reporte seleccionado
-    switch (pageType) {
-      case 'Jardinería':
-        selectedTemplate = Jardineria;
-        break;
-      case 'Conserjería':
-        selectedTemplate = ConserjeriaTemplate;
-        break;
-      case 'Mantenimiento de Alberca':
-        selectedTemplate = AlbercaTemplate;
-        break;
-      case 'Seguridad':
-        selectedTemplate = SeguridadTemplate;
-        break;
-      case 'Áreas Comunes':
-        selectedTemplate = JardineriaBeforeAndThen;
-        break;
-      case 'Mantenimiento':
-        selectedTemplate = MantenimientoTemplate;
-        break;
-      case 'Avisos':
-        selectedTemplate = AvisosTemplate;
-        break;
-      default:
-        selectedTemplate = '';
-        break;
-    }
-  
-    // Crear el nuevo objeto de página con la plantilla seleccionada
+
+    const selectedTemplate = TemplateSelector({ pageType }); // Utiliza el TemplateSelector para obtener la plantilla
     const newPage = { 
       id: Date.now(), 
       title: pageType, 
       type: pageType, 
       text: text, 
       photos: images, 
-      template: selectedTemplate // Asignamos la plantilla aquí
+      template: selectedTemplate
     };
-  
-    addPage(newPage); // Agrega la página al contexto
-    handleClose(); // Limpia el modal
+
+    addPage(newPage); 
+    handleClose(); 
   };
 
   const handleImageUpload = (newImages) => {
@@ -106,7 +68,6 @@ const AddPageModal = ({ open, onClose }) => {
     handleClose();
   };
 
-  // Calculate the number of characters left
   const charsLeft = maxChars - text.length;
   let charsColor = 'green';
   if (charsLeft < 0) charsColor = 'red';
@@ -126,7 +87,7 @@ const AddPageModal = ({ open, onClose }) => {
           transform: 'translate(-50%, -50%)',
           boxShadow: 24,
           borderRadius: 2,
-          overflowY: 'auto' // Habilita el desplazamiento vertical
+          overflowY: 'auto'
         }}
       >
         <Typography variant="h6" component="h2">
@@ -138,23 +99,8 @@ const AddPageModal = ({ open, onClose }) => {
           </Typography>
         )}
         <Box mt={2}>
-          <TextField 
-            fullWidth 
-            select 
-            value={pageType} 
-            onChange={(e) => setPageType(e.target.value)}
-            SelectProps={{ native: true }}
-            required
-            label="Tipo de Reporte"
-          >
-            <option value=""></option>
-            <option value="Jardinería">Jardinería</option>
-            <option value="Conserjería">Conserjería</option>
-            <option value="Mantenimiento de Alberca">Mantenimiento de Alberca</option>
-            <option value="Seguridad">Seguridad</option>
-            <option value="Mantenimiento">Mantenimiento</option>
-            <option value="Avisos">Avisos</option>
-          </TextField>
+          {/* Utiliza el nuevo selector de tipo de reporte */}
+          <ReportTypeSelector pageType={pageType} setPageType={setPageType} />
         </Box>
         <Box mt={2}>
           <PhotoUploader onPhotoUpload={handleImageUpload} />
@@ -183,8 +129,8 @@ const AddPageModal = ({ open, onClose }) => {
             onChange={handleTextChange}
             placeholder="Escribe el texto aquí"
             required
-            inputProps={{ maxLength: maxChars }} // Ajusta la longitud máxima
-            sx={{ textAlign: 'justify' }} // Justifica el texto
+            inputProps={{ maxLength: maxChars }} 
+            sx={{ textAlign: 'justify' }}
           />
           <Box mt={1} sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <Typography variant="body2" color={charsColor}>

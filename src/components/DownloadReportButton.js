@@ -7,8 +7,9 @@ import { Button } from '@mui/material';
 import calculateLayout from './Layout/DynamicPhotoLayout';
 import calculateTextLayout from './Layout/DynamicTextLayout';
 
-// Importa la imagen de la portada
+// Importa la imagen de la portada y la imagen de la última página
 import PortraitTemplate from './images/BackgroundTemplates/Portrait.JPG';
+import LastPageImage from './images/LastPagesDocuments/lastPage.jpg'; // Imagen de la última página
 
 const DownloadReportButton = () => {
   const { reportData } = useContext(ReportContext);
@@ -21,31 +22,24 @@ const DownloadReportButton = () => {
     });
 
     // *** Portada ***
-
-    // Añadir la imagen de la portada
     doc.addImage(PortraitTemplate, 'JPEG', 0, 0, 60.144, 33.831);
 
     // Texto "INFORME DE ACTIVIDADES"
     doc.setFont('Nunito', 'Medium');
-    doc.setFontSize(50); // Puedes ajustar este tamaño
+    doc.setFontSize(50); // Ajusta este tamaño
     doc.text('INFORME DE ACTIVIDADES', 3, 17, {
-      maxWidth: 15 // Ajusta el ancho máximo del texto si lo deseas
+      maxWidth: 15
     });
 
     // Texto del mes y año (con letras blancas)
-    doc.setTextColor(255, 255, 255); // Establece el color del texto a blanco
-    doc.setFontSize(50); // Tamaño del texto para el mes
+    doc.setTextColor(255, 255, 255);
+    doc.setFontSize(55); // Tamaño del texto para el mes
     doc.text(`${reportData.month} 2024`, 3, 28, {
-      maxWidth: 50 // También puedes ajustar el ancho máximo si lo deseas
+      maxWidth: 50
     });
 
     // Restaurar el color del texto para el resto del PDF
     doc.setTextColor(0, 0, 0);
-
-    // Añadir nuevas páginas
-    if (reportData.pages.length > 0) {
-      doc.addPage();
-    }
 
     // *** Páginas del informe ***
     reportData.pages.forEach((page, index) => {
@@ -81,6 +75,10 @@ const DownloadReportButton = () => {
         doc.addPage();
       }
     });
+
+    // *** Añadir la última página como imagen ***
+    doc.addPage(); // Añadir una nueva página
+    doc.addImage(LastPageImage, 'JPEG', 0, 0, 60.144, 33.831); // Agregar la imagen de la última página
 
     // *** Descargar el PDF generado ***
     doc.save('Informe-de-actividades.pdf');
